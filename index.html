@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Planillas de Transformadores</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="FORMATO DE RETIRO/style.css">
+
+</head>
+<body>
+    <header>
+        <h1>Gestión de Transformadores</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li id="crear-planilla-btn">Crear Planilla</li>
+            <li id="section-planillas"><a href="index.html">Planilla</a></li>
+            <li id="section-estadisticas"><a href="estadistica.html">Estadisticea</a></li>
+        </ul>
+    </nav>
+
+    <main class="contenido" id="contenido">
+        <section class="planillas">
+    <div class="buscador">
+        <input type="text" id="buscar-planillas" placeholder="Introduce el serial o la marca">
+        <button id="search-btn">Buscar</button>
+    </div>
+
+    <div id="lista-planillas">
+        <!-- Aquí se generarán dinámicamente las planillas -->
+    </div>
+
+    <div id="paginacion">
+        <button class="anterior">«</button>
+        <button class="pagina">1</button>
+        <button class="pagina">2</button>
+        <button class="pagina">3</button>
+        <button class="siguiente">»</button>
+    </div>
+</section>
+
+    </main>
+
+    <div id="ventana-negra" class="hidden">
+        <div id="modal-form" class="hidden">
+    <div class="modal-content">
+        <div class="header-modal">
+            <h2>Crear o Editar Planilla</h2>
+        <div id="caja-cerrar-modal">
+            <button id="cerrar-modal">X</button>
+        </div>
+            
+        </div>
+        
+        
+            <form class="formulario">
+
+            <!-- Grupo de Trabajo -->
+            <fieldset>
+                <legend>Grupo de trabajo</legend>
+                <div class="formulario_grupoDeTrabajo--grid">
+
+                    <label>Nombre del Grupo de Trabajo:
+                        <input type="text" id="nombreGrupoTrabajo-transformador" />
+                    </label>
+                
+
+                    <label>Correlativo:
+                        <input type="text" id="correlativo-transformador" />
+                    </label>
+                    
+
+                    <label>Fecha de Trabajo:
+                        <input type="date" id="fechaTrabajo-transformador" />
+                    </label>
+                        
+                    </div> 
+            </fieldset>
+
+
+            <!-- Responsable de Cuadrilla -->
+            <fieldset>
+                <legend>RESPONSABLE DE LA CUADRILLA</legend>
+                <div class="responsableDeLaCuadrilla-grid">
+                    <label>Responsable del Grupo de Trabajo:
+                        <input type="text" id="responsableGrupoTrabajo-transformador" />
+                    </label>
+                    
+
+                    <label>Centro de Servicio:
+                        <input type="text" id="centroServicio-transformador" />
+                    </label>
+                    
+
+                    <label>Operador de Mesa:
+                        <input type="text" id="operadorMesa-transformador" />
+                    </label>
+                    
+
+                    <!-- Sección para los radios: EVENTO -->
+                    <fieldset>
+                        <legend>Evento:</legend>
+                        <label><input type="radio" name="evento" value="averia" /> Avería</label>
+                        <label><input type="radio" name="evento" value="proyecto" /> Proyecto</label>
+                        <label><input type="radio" name="evento" value="orden de" /> Orden de</label>
+                        <label><input type="radio" name="evento" value="memo" /> Memo</label>
+                    </fieldset>
+
+
+                    <label>Número de Evento:
+                        <input type="text" id="numeroEvento-transformador" />
+                    </label>
+                    
+
+                    <label>Subestación:
+                        <input type="text" id="subestacion-transformador" />
+                    </label>
+                    
+
+                    <label>Estado:
+                        <input type="text" id="estado-transformador" />
+                    </label>
+                    
+
+                    <label>Municipio:
+                        <input type="text" id="municipio-transformador" />
+                    </label>
+                    
+
+                    <label>Sector/Parroquia/N Plano:
+                        <input type="text" id="sectorParroquiaNPlano-transformador" />
+                    </label>
+                    
+
+                    <label>Circuito:
+                        <input type="text" id="circuito-transformador" />
+                    </label>
+                    
+
+                    <label>Número de Poste / Ubicación:
+                        <input type="text" id="numeroPosteUbicacion-transformador" />
+                    </label>
+                    
+
+                    <label>Identificación:
+                        <input type="text" id="identificacion-transformador" />
+                    </label>
+                    
+
+                    <label>Dirección(Punto de Referencia):
+                        <input type="text" id="direccionPuntoReferencia-transformador" />
+                    </label>
+                    
+
+                   
+
+
+                    
+
+                    <fieldset>
+                        <legend>Trabajo a realizar:</legend>
+                        <label><input type="radio" name="trabajoRealizar" value="solo retiro" /> SOLO RETIRO</label>
+                        <label><input type="radio" name="trabajoRealizar" value="cambio de equipo" />CAMBIO DE EQUIPO</label>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Transoformador se cambia por uno de:</legend>
+                        <label><input type="radio" name="transformadorCambiaPor" value="igual capacidad" />IGUAL CAPACIDAD</label>
+                        <label><input type="radio" name="transformadorCambiaPor" value="diferente capacidad" />DIFERENTE CAPACIDAD</label>
+                    </fieldset>
+
+
+
+
+                    <label>Número de Usuarios Afectados:
+                        <input type="text" id="numeroUsuariosAfectados-transformador" />
+                    </label>
+                    
+
+                    <label>Observaciones:
+                        <input type="text" id="observaciones-transformador" />
+                    </label>
+                    
+                        
+                    </div>
+                
+
+
+            </fieldset>
+
+
+
+
+            <!-- Responsable en Campo -->
+            <fieldset>
+                <legend>Para ser llenado por el responsable del trabajo en campo/supervisor técnico</legend>
+                <div class="responsableDeCampo-grid">
+                    <label>Nombre y Apellido:
+                        <input type="text" id="nombreSupervisorTecnico-transformador" />
+                    </label>
+                    
+
+                    <label>Firma:
+                        <input type="text" id="firmaSupervisorTecnico-transformador" />
+                    </label>
+
+                    
+
+                    <label>Cédula:
+                        <input type="text" id="cedulaSupervisorTecnico-transformador" />
+                    </label>
+                    
+
+                    <label>Número de Reserva:
+                        <input type="text" id="numeroReservaSupervisorTecnico-transformador" />
+                    </label>
+                    
+
+                    <label>Fecha de Solicitud:
+                        <input type="date" id="FechaSolicitudSupervisorTecnico-transformador" />
+                    </label>
+                    
+                </div>
+                
+
+            </fieldset>
+                
+
+            
+            <!-- Descripción del Transformador Desinstalado -->
+            <fieldset>
+                <legend>Descripción del transformador desinstalado</legend>
+
+                <div class="descripcionTransformadorDesintalado-grid">
+                    <label>Tensiones Primarias:
+                        <input type="text" id="tensionesPrimarias-transformador" />
+                    </label>
+                    
+
+                    <label>Tensiones Secundarias:
+                        <input type="text" id="tensionesSecundarias-transformador" />
+                    </label>
+                    
+
+                    <label>KVA:
+                        <input type="text" id="kva-transformador" />
+                    </label>
+                    
+
+                    <!--IMPORTANTE-->
+                    <label>Serial:
+                        <input type="text" id="serial-transformador" />
+                    </label>
+                    
+
+                    <label>Marca:
+                        <input type="text" id="marca-transformador" />
+                    </label>
+                    
+                     <!--IMPORTANTE-->
+
+                    <label>Año de Fabricación:
+                        <input type="text" id="añoFabricacion-transformador" />
+                    </label>
+                    
+                </div>
+
+            </fieldset>
+
+            <!-- Retirado de la red por -->
+
+            <fieldset>
+                <legend>Retirado de la red por</legend>
+                <div class="retiradoDeLaRedPor-grid">
+                    <label>Nombre y Apellido:
+                        <input type="text" id="retiradoNombre-transformador" />
+                    </label>
+                    
+
+                    <label>Fecha:
+                        <input type="date" id="retiradoFecha-transformador" />
+                    </label>
+                    
+
+                    <label>Hora:
+                        <input type="time" id="retiradoHora-transformador" />
+                    </label>
+                    
+                </div>
+                
+            </fieldset>
+
+
+            <!-- Equipo que sustituyó al desinstalado de la red -->
+
+            <fieldset>
+                <legend>Equipo que sustituyó al desinstalado de la red</legend>
+                <div class="equipoAlQueSustituyoAlDesinstaldoDeLaRed-grid">
+                    <label>Marca:
+                    <input type="text" id="sustitutoMarca-transformador" />
+                    </label>
+                    
+
+                    <label>Serial:
+                        <input type="text" id="sustitutoSerial-transformador" />
+                    </label>
+                    
+
+                    <label>Capacidad:
+                        <input type="text" id="sustitutoCapacidad-transformador" />
+                    </label>
+                    
+
+                    <label>Año de Fabricación:
+                        <input type="text" id="sustitutoAnoFab-transformador" />
+                    </label>
+                </div>
+
+                
+            </fieldset>
+
+            <!-- Responsable Centro de Servicio -->
+
+            <fieldset>
+                <legend>Para ser llenado por el responsable del centro de servicio al recibir un equipo de la red</legend>
+                <div class="responsableCentroDeServicio-grid">
+                    <label>Recibido por(Nombre y Apellido):
+                        <input type="text" id="centroServicioNombre-transformador" />
+                    </label>
+                    
+
+                    <label>Fecha:
+                        <input type="date" id="centroServicioFecha-transformador" />
+                    </label>
+                    
+
+                    <label>Hora:
+                        <input type="time" id="centroServicioHora-transformador" />
+                    </label>
+                    
+
+                    <label>Sello:
+                        <input type="text" id="centroServicioSello-transformador" />
+                    </label>
+                    
+
+                    <label>Estado Físico Del Equipo Retirado:
+                        <input type="text" id="centroServicioEstadoFisico-transformador" />
+                    </label>
+                    
+                        
+                    </div>
+
+            </fieldset>
+
+
+
+            
+            <!-- Division de mantenimiento especializado de distribucion -->
+            <fieldset>
+                <legend>Para ser llenado por la división de mantenimiento especializado de distribución</legend>
+                <div class="divManEs-grid">
+                    <label>Evaluado por(Nombre y Apellido):
+                        <input type="text" id="divManEsDiNombre-transformador" />
+                    </label>
+                    
+
+                    <label>fecha:
+                        <input type="date" id="divManEsDiFecha-transformador" />
+                    </label>
+                    
+
+                    <label>hora
+                        <input type="time" id="divManEsDiHora-transformador" />
+                    </label>
+                    
+
+
+                    <!-- CONDICION EQUIPO EVALUADO -->
+                    <fieldset>
+                        <legend>condicion del equipo evaluado:</legend>
+                        <label><input type="radio" name="divManEsDiCondicion" value="mantenimiento" /> MANTENIMIENTO </label>
+                        <label><input type="radio" name="divManEsDiCondicion" value="garantia" /> GARANTIA </label>
+                        <label><input type="radio" name="divManEsDiCondicion" value="reconstruccion" /> RECONSTRUCCION</label>
+                        <label><input type="radio" name="divManEsDiCondicion" value="no procesable" /> NO PROCESABLE </label>
+                    </fieldset>
+
+                    </div>
+                </fieldset>
+                    
+                
+                
+
+            
+            <!-- diagnostico obtenido -->
+            <fieldset>
+                <legend>Diagnostico Obtenido</legend>
+                    <div class="diagnosticoObtenido-grid">
+                        <input type="text" id="diagnosticoObtenido-transformador" />
+                    </div>
+                    
+                
+                
+            </fieldset>
+
+            <!-- Unidad de Retiro del Equipo -->
+            <fieldset>
+                <legend>Para ser llenado por la unidad que retira el equipo</legend>
+                <div class="unidadQueRetiraElEquipo-grid">
+                    <label>Taller Reparaciones Menores:
+                        <input type="text" id="tallerReparacionesMenores-transformador" />
+                    </label>
+
+                    <label>Fabricante:
+                        <input type="text" id="fabricante-transformador" />
+                    </label>
+                    
+
+                    <label>Planta Recuperación Transformadores:
+                        <input type="text" id="plantaRecuperacionTransformadores-transformador" />
+                    </label>
+
+                    <label>Planta Recuperación Transformadores :
+                        <input type="text" id="plantaRecuperacionTransformadoresPorExternos-transformador" />
+                    </label>
+                    
+
+                    
+                    
+                    
+                </div>
+                
+
+            </fieldset>
+
+
+            <!-- DATOS DE UNIDAD QUIEN RETIRA EL EQUIPO -->
+
+            <fieldset>
+                <legend>PARA SER LLENADO POR LA UNIDAD QUE RETIRA EL EQUIPO</legend>
+                <div class="datosUnidadQueRetiraElEquipo-grid">
+                    <label>Recibido por: (Nombre y Apellido):
+                        <input type="text" id="unidadRetiraEquipoNombre-transformador" />
+                    </label>
+                    
+
+                    <label>Sello:
+                        <input type="text" id="unidadRetiraEquipoSello-transformador" />
+                    </label>
+                    
+
+                    <label>Fecha:
+                        <input type="date" id="unidadRetiraEquipoFecha-transformador" />
+                    </label>
+                    
+
+                    <label>Hora:
+                        <input type="time" id="unidadRetiraEquipoHora-transformador" />
+                    </label>
+                    
+                        
+                </div>
+                
+            </fieldset>
+           
+
+           
+
+            
+
+            
+
+            
+
+            
+
+            
+        </form>
+        <button type="button" id="guardar-planilla-btn">Guardar</button>   
+    </div>
+    </div>
+
+    </div>
+
+
+
+<!-- VISTA DE LA PLANILLA -->
+
+
+
+<div id="ventana-negra-planilla" class="planilla-hidden">
+    <div id="contenedor-planilla-madre" class="planilla-hidden">
+    <button id="cerrar-modal-planilla">X</button>
+    <div class="contenido-planilla-madre-relleno"></div>
+    <div class="contenedor-planilla">    
+         <div class="fila_1">
+                <div class="div1 fila_1__div1 bordear aliniar_fila_1">
+                    <img src="FORMATO DE RETIRO/imagenes/logo.png">
+                </div>
+                <div class="div2 fila_1__div2 aliniar_fila_1"> <span>Planilla de transformador retirado de <span>la red</span></span></div>
+                <div class="div3 fila_1__div3"> 
+                    <div class="div3_contenedor">
+                                <div class="div3_contenedor__div1 aliniar_fila_1"> NOMBRE DEL GRUPO DE TRABAJO </div>
+                                <div class="div3_contenedor__div2 aliniar_fila_1"> CORRELATIVO</div>
+                                <div class="div3_contenedor__div3 aliniar_fila_1" id="nombreGrupoTrabajo-planilla"> GRUPO </div>
+                                <div class="div3_contenedor__div4 aliniar_fila_1" id="correlativo-planilla"> GRUPO </div>
+                                <div class="div3_contenedor__div5 aliniar_fila_1"> FECHA DEL TRABAJO</div>
+                                <div class="div3_contenedor__div6 aliniar_fila_1" id="fechaTrabajo-dato-planilla"> 6</div>
+                        
+                    </div>
+                </div>
+        </div> 
+        <div class="separador_1">
+            Para ser llenado por el responsable de la cuadrilla
+        </div>
+         <div class="fila_2">
+                <div class="fila_2__div1">Nombre del responsable del grupo de trabajo</div>
+                <div class="fila_2__div2" id="nombreResponsableGrupoTrabajo-dato-planilla"> Scooby Doo </div>
+                <div class="fila_2__div3"> Centro de <br> servicio </div>
+                <div class="fila_2__div4" id="centroServicio-dato-planilla"> Socopo</div>
+                <div class="fila_2__div5"> Operador de <br> mesa</div>
+                <div class="fila_2__div6" id="operadorMesa-dato-planilla"> Bob Esponja </div> 
+        </div> 
+
+         <div class="fila_3">
+                <div class="fila_3__div1">
+                    <div class="fila_3__div1__titulo">
+                         <div class="fila_3__div1__contenedor">
+                            <div class="fila_3__div1__contenedor__div1"> <div>EVENTO:</div> </div>
+                            <div class="fila_3__div1__contenedor__div2"><div></div></div>
+                            <div class="fila_3__div1__contenedor__div3"> <div>NUMERO DEL EVENTO</div> </div>
+                        </div> 
+                    </div>
+                        <div class="fila_3__div1__contenido">
+                                <div class="fila_3__div1__contenido__div1"> <div><div class="borde-caja evento-opcion"></div><p>AVERIA</p></div> </div>
+                                <div class="fila_3__div1__contenido__div2"> <div><div class="borde-caja evento-opcion"></div><p>PROYECTO</p></div> </div>
+                                <div class="fila_3__div1__contenido__div3"> <div><div class="borde-caja evento-opcion"></div><p>ORDEN DE</p></div> </div>
+                                <div class="fila_3__div1__contenido__div4"> <div><div class="borde-caja evento-opcion"></div><p>MEMO</p></div> </div>
+                                <div class="fila_3__div1__contenido__div5"> <span id="numeroEvento-dato-planilla"></span> </div>
+                        </div> 
+
+                </div>
+
+                    <div class="fila_3__div2"> 
+                        <div class="fila_3__div2__titulo"> SUBESTACION </div>
+                        <div class="fila_3__div2__contenido"> <p id="subestacion-dato-planilla"></p> </div>
+                    </div>
+                    <div class="fila_3__div3"> 
+                        <div class="fila_3__div3__titulo"> ESTADO </div>
+                        <div class="fila_3__div3__contenido"> <p id="estado-dato-planilla"> </p> </div>
+                    </div>
+                    <div class="fila_3__div4"> 
+                        <div class="fila_3__div4__titulo"> MUNICIPIO </div>
+                        <div class="fila_3__div4__contenido"> <p id="municipio-dato-planilla">  </p> </div>
+                    </div>
+                    <div class="fila_3__div5">
+                        <div class="fila_3__div5__titulo"> SECTOR/PARROQUIA/Nª PLANO </div>
+                        <div class="fila_3__div5__contenido"> <p id="sectorParroquiaNPlano-dato-planilla">  </p> </div>
+                    </div>
+                    <div class="fila_3__div6"> </div>
+                
+        </div> 
+
+         <div class="fila_4">
+                <div class="fila_4__div1"> 
+                    <div class="fila_4__div1__titulo"> CIRCUITO </div>
+                    <div class="fila_4__div1__contenido"> <p id="circuito-dato-planilla">  </p> </div>
+                </div>
+                <div class="fila_4__div2">
+                    <div class="fila_4__div2__titulo"> NUMERO DE POSTE/UBICACION </div>
+                    <div class="fila_4__div2__contenido"> <p id="numeroPosteUbicacion-dato-planilla"> </p></div>
+                </div>
+                <div class="fila_4__div3"> 
+                    <div class="fila_4__div3__titulo"> IDENTIFICACION(PD/T/CC/OTROS) </div>
+                    <div class="fila_4__div3__contenido"> <p id="identificacion-dato-planilla"> </p></div>
+                </div>
+                <div class="fila_4__div4">
+                    <div class="fila_4__div4__titulo"> <div><h2>DIRECCION (PUNTO DE REFERENCIA)</h2></div> </div>
+                    <div class="fila_4__div4__contenido"> <div><p id="direccionPuntoReferencia-dato-planilla">  </p></div></div>
+                    
+                </div>
+
+                <!-- Segundo bloque de la fila 4-->
+                <div class="fila_4__div5">
+                    <div class="fila_4__div5__contenido1 ">
+                        <div class="fila_4__div5__contenido1__titulo titulo">TRABAJO A REALIZAR:</div>
+                        <div class="fila_4__div5__contenido1__contenido">
+                                <div class="fila_4__div5__contenido1__contenido__primeraCaja">
+                                    <div><div class="borde-caja trabajoRealizarCajaPequeña"></div><p>SOLO RETIRO</p></div>
+                                 </div>
+                                <div class="fila_4__div5__contenido1__contenido__segundaCaja">
+                                    <div><div class="borde-caja trabajoRealizarCajaPequeña"></div><p>CAMBIO DE EQUIPO</p></div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="fila_4__div5__contenido2 ">
+                        <div class="fila_4__div5__contenido2__titulo titulo">TRANSFORMADOR SE CAMBIA POR UNO DE:</div>
+                        <div class="fila_4__div5__contenido2__contenido">
+                                <div class="fila_4__div5__contenido2__contenido__primeraCaja">
+                                    <div><div class="borde-caja transformadorCambiaPorCajaPequeña"></div><p>IGUAL CAPACIDAD</p></div>
+                                 </div>
+                                <div class="fila_4__div5__contenido2__contenido__segundaCaja">
+                                    <div><div class="borde-caja transformadorCambiaPorCajaPequeña"></div><p>DIFERENTE CAPACIDAD</p></div>
+                                </div>
+                        </div>
+
+                    </div>
+                    <div class="fila_4__div5__contenido3 ">
+                        <div class="fila_4__div5__contenido3__titulo titulo">NUMERO DE USUARIOS AFECTADOS:</div>
+                        <div class="fila_4__div5__contenido3__contenido" id="numeroUsuariosAfectados-dato-planilla"> ##
+                            
+                        </div>
+                    </div>
+                    <div class="fila_4__div5__contenido4 ">
+                        <div class="fila_4__div5__contenido4__titulo titulo">OBSERVACIONES:</div>
+                        <div class="fila_4__div5__contenido4__contenido" id="observaciones-dato-planilla"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            
+                        </div>
+                    </div>
+                </div>
+                
+        </div>
+
+        <div class="separador_2">PARA SER LLENADO POR EL RESPONSABLE DEL TRABAJO EN CAMPO/SUPERVISOR TECNICO</div>
+
+        <div class="fila5">
+                <div class="fila5__div1">
+                    <div class="fila5__div1__titulo tituloAlineado">NOMBRE Y APELLIDO</div>
+                    <div class="fila5__div1__contenido"><p id="nombreSupervisorTecnico-dato-planilla"></p></div>
+                </div>
+                <div class="fila5__div2">
+                    <div class="fila5__div2__titulo tituloAlineado"> FIRMA </div>
+                    <div class="fila5__div2__contenido"><p id="firmaSupervisorTecnico-dato-planilla"></p></div>
+                </div>
+                <div class="fila5__div3">
+                    <div class="fila5__div3__titulo tituloAlineado"> CEDULA </div>
+                    <div class="fila5__div3__contenido"><p id="cedulaSupervisorTecnico-dato-planilla"></p></div>
+                </div>
+                <div class="fila5__div4">
+                    <div class="fila5__div4__titulo tituloAlineado"> Nª DE RESERVA </div>
+                    <div class="fila5__div4__contenido"><p id="numeroReservaSupervisorTecnico-dato-planilla"></p></div>
+                </div>
+                <div class="fila5__div5">
+                    <div class="fila5__div3__titulo tituloAlineado"> FECHA DE SOLICITUD </div>
+                    <div class="fila5__div3__contenido"><p id="FechaSolicitudSupervisorTecnico-dato-planilla">25/12/24</p></div>
+                </div>
+        </div>
+
+
+        <div class="separador_3">DESCRIPCION DEL TRANSFORMADOR RETIRADO</div>
+
+        <div class=" separador_3 separador_4">PARA SER LLENADO POR EL RESPONSABLE DE CUADRILLA</div>
+
+        <div class="fila6">
+            <div class="fila6__div1">
+                <div>
+                    <div>TENSIONES PRIMARIAS:</div>
+                    <div><span id="tensionesPrimarias-dato-planilla"></span></div>
+                </div>
+                <div>
+                    <div>TENSIONES SECUNDARIAS:</div>
+                    <div><span id="tensionesSecundarias-dato-planilla">120/220V</span></div>
+                </div>
+                <div>
+                    <div>Kva:</div>
+                    <div><span id="kva-dato-planilla">50Kva</span></div>
+                </div>
+            </div>
+            <div class="fila6__div2">
+                
+                    <div>
+                        <div>SERIAL:</div>
+                        <div><span id="serial-dato-planilla"></span></div>
+                    </div>
+                    <div>
+                        <div>MARCA:</div>
+                        <div><span id="marca-dato-planilla"></span></div>
+                    </div>
+                    <div>
+                        <div>AÑO DE FABRICACION:</div>
+                        <div><span id="añoFabricacion-dato-planilla"></span></div>
+                    </div>
+                
+            </div>
+            </div>
+
+        <div class="separador_5">
+            <div>RETIRADO DE LA RED POR:</div>
+            <div>EQUIPO QUE SUSTITUYO AL DESINSTALADO DE LA RED:</div>
+        </div>
+
+        <div class="fila7">
+                <div class="fila7__cajaPrimera">
+                    <div class="fila7__cajaPrimera__div1 bordear">
+                        <div class="fila7__div1__titulo tituloAlineado">NOMBRE Y APELLIDO</div>
+                        <div class="fila7__div1__contenido contenido-planilla"><p id="retiradoNombre-dato-planilla">EDUARDO LEE</p></div>
+                    </div>
+                    <div class="fila7__cajaPrimera__div2 bordear">
+                        <div class="fila7__div2__titulo tituloAlineado"> FECHA </div>
+                        <div class="fila7__div2__contenido contenido-planilla"><p id="retiradoFecha-dato-planilla"></p></div>
+                    </div>
+                    <div class="fila7__cajaPrimera__div3 bordear">
+                        <div class="fila7__div3__titulo tituloAlineado"> HORA </div>
+                        <div class="fila7__div3__contenido contenido-planilla"><p id="retiradoHora-dato-planilla"></p></div>
+                    </div>
+                </div>
+
+
+                <div class="fila7__cajaSegunda">
+                    <div class="fila7__cajaSegunda__div1 bordear">
+                        <div class="fila7__div1__titulo tituloAlineado">MARCA</div>
+                        <div class="fila7__div1__contenido contenido-planilla"><p id="sustitutoMarca-dato-planilla">CORPOELEC</p></div>
+                    </div>
+                    <div class="fila7__cajaSegunda__div2 bordear">
+                        <div class="fila7__div2__titulo tituloAlineado"> SERIAL </div>
+                        <div class="fila7__div2__contenido contenido-planilla"><p id="sustitutoSerial-dato-planilla">5541585</p></div>
+                    </div>
+                    <div class="fila7__cajaSegunda__div3 bordear">
+                        <div class="fila7__div3__titulo tituloAlineado"> CAPACIDAD </div>
+                        <div class="fila7__div3__contenido contenido-planilla"><p id="sustitutoCapacidad-dato-planilla">25Kva</p></div>
+                    </div>
+                </div>
+                
+        </div>
+
+        <div class=" separador_6 ">PARA SER LLENADO POR EL RESPONSABLE DEL CENTRO DE SERVICIO AL RECIBIR UN EQUIPO RETIRADO DE LA RED</div>
+
+
+        <div class="fila8">
+            <div class="fila8__cajaPrimera">
+                <div class="fila8__cajaPrimera__div1 bordear">
+                    <div class="fila8__div1__titulo tituloAlineado">RECIBIDO POR (NOMBRE Y APPELIDO)</div>
+                    <div class="fila8__div1__contenido contenido-planilla"><p id="centroServicioNombre-dato-planilla"></p></div>
+                </div>
+                <div class="fila8__cajaPrimera__div2 bordear">
+                    <div class="fila8__div2__titulo tituloAlineado"> FECHA </div>
+                    <div class="fila8__div2__contenido contenido-planilla"><p id="centroServicioFecha-dato-planilla"> </p></div>
+                </div>
+                <div class="fila7__cajaPrimera__div3 bordear">
+                    <div class="fila8__div3__titulo tituloAlineado"> HORA </div>
+                    <div class="fila8__div3__contenido contenido-planilla"><p id="centroServicioHora-dato-planilla">10:30</p></div>
+                </div>
+            </div>
+
+
+            <div class="fila8__cajaSegunda">
+                <div class="fila8__cajaSegunda__div1 bordear">
+                    <div class="fila7__div1__titulo tituloAlineado">SELLO</div>
+                    <div class="fila7__div1__contenido contenido-planilla"><p id="centroServicioSello-dato-planilla">CORPOELEC</p></div>
+                </div>
+                <div class="fila8__cajaSegunda__div2 bordear">
+                    <div class="fila8__div2__titulo tituloAlineado"> ESTADO FISICO DEL EQUIPO RETIRADO </div>
+                    <div class="fila8__div2__contenido contenido-planilla"><p id="centroServicioEstadoFisico-dato-planilla"></p></div>
+                </div>
+                
+            </div>
+            
+    </div>
+
+
+
+    <div class=" separador_7 ">PARA SER LLENADO POR LA DIVISION DE MANTENIMIENTO ESPECIALIZADO DE DISTRIBUCIO</div>
+
+    <div class="fila9">
+        <div class="fila9__cajaPrimera">
+            <div class="fila9__cajaPrimera__div1 bordear">
+                <div class="fila9__div1__titulo tituloAlineado">RECIBIDO POR (NOMBRE Y APPELIDO)</div>
+                <div class="fila8__div1__contenido contenido-planilla"><p id="divManEsDiNombre-dato-planilla"></p></div>
+            </div>
+            <div class="fila9__cajaPrimera__div2 bordear">
+                <div class="fila9__div2__titulo tituloAlineado"> FECHA </div>
+                <div class="fila9__div2__contenido contenido-planilla"><p id="divManEsDiFecha-dato-planilla"> 12 / 11 / 1997</p></div>
+            </div>
+            <div class="fila7__cajaPrimera__div3 bordear">
+                <div class="fila9__div3__titulo tituloAlineado"> HORA </div>
+                <div class="fila9__div3__contenido contenido-planilla"><p id="divManEsDiHora-dato-planilla"></p></div>
+            </div>
+        </div>
+
+
+        <div class="fila9__cajaSegunda">
+            <div class="fila9__cajaSegunda__titulo tituloAlineado">CONDICION DEL EQUIPO EVALUADO</div>
+            <div class="fila9__cajaSegunda__contenido">
+                <div class="fila9__cajaSegunda__contenido__div1">
+                    <div>
+                        <div class="borde-caja condicionEquipoEvaluadoCajaPequena"></div>
+                        <span class="textoJuntoSelectores">MANTENIMIENTO</span>
+                    </div>
+                </div>
+                <div class="fila9__cajaSegunda__contenido__div2">
+                    <div>
+                        <div class="borde-caja condicionEquipoEvaluadoCajaPequena"></div>
+                        <span class="textoJuntoSelectores">GARANTIA</span>
+                    </div>
+                </div>
+                <div class="fila9__cajaSegunda__contenido__div3">
+                    <div>
+                        <div class="borde-caja condicionEquipoEvaluadoCajaPequena"></div>
+                        <span class="textoJuntoSelectores">RECONSTRUCCION</span>
+                    </div>
+                </div>
+                <div class="fila9__cajaSegunda__contenido__div4">
+                    <div>
+                        <div class="borde-caja condicionEquipoEvaluadoCajaPequena"></div>
+                        <span class="textoJuntoSelectores">NO PROCESABLE</span>
+                    </div>
+                </div>
+                
+
+                
+            </div>
+            
+            
+        </div>
+        
+</div>
+
+<div class="separador_8 ">DIAGNOSTICO OBTENIDO</div>
+
+<div class="fila10">
+    <p id="diagnosticoObtenido-dato-planilla">CONTENIDO</p>
+</div>
+
+
+<div class="separador_9 ">PARA SER LLENADO POR LA UNIDAD QUE RETIRA EL EQUIPO</div>
+
+<div class="fila10">
+    <div class="fila10__cajaPrimera">
+        <div class="fila10__cajaPrimera__div1 bordear">
+            <div class="fila10__div1__titulo tituloAlineado">POR CORPOELEC</div>
+            <div class="fila10__div1__contenido">
+                    <div><h4>TALLER DE REPARACIONES MENORES: </h4><p id="tallerReparacionesMenores-dato-planilla"></p></div>
+                    <div><h4>PLANTA DE RECUPERACION DE TRANSFORMADORES: </h4><p id="plantaRecuperacionTransformadores-dato-planilla"></p></div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div class="fila10__cajaSegunda">
+        <div class="fila10__cajaSegunda__div1 bordear">
+            <div class="fila10__div1__titulo tituloAlineado">POR EXTERNOS</div>
+            <div class="fila10__div1__contenido">
+                    <div><h4>FABRICANTE: </h4><p id="fabricante-dato-planilla"></p></div>
+                    <div><h4>PLANTA DE RECUPERACION DE TRANSFORMADORES: </h4><p id="plantaRecuperacionTransformadoresPorExternos-dato-planilla">TEXTO 4</p></div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+
+<div class="fila11">
+    <div class="fila11__cajaPrimera">
+        <div class="fila11__cajaPrimera__div1 bordear">
+            <div class="fila11__div1__titulo tituloAlineado">RECIBIDO POR (NOMBRE Y APPELIDO)</div>
+            <div class="fila11__div1__contenido contenido-planilla"><p id="unidadRetiraEquipoNombre-dato-planilla"></p></div>
+        </div>
+    </div>
+
+
+    <div class="fila11__cajaSegunda">
+        <div class="fila11__cajaSegunda__div1 bordear">
+            <div class="fila11__div1__titulo tituloAlineado">SELLO</div>
+            <div class="fila11__div1__contenido contenido-planilla"><p id="unidadRetiraEquipoSello-dato-planilla"></p></div>
+        </div>
+        <div class="fila11__cajaSegunda__div2 bordear">
+            <div class="fila11__div2__titulo tituloAlineado"> FECHA </div>
+            <div class="fila11__div2__contenido contenido-planilla"><p id="unidadRetiraEquipoFecha-dato-planilla"></p></div>
+        </div>
+        <div class="fila11__cajaSegunda__div3 bordear">
+            <div class="fila11__div2__titulo tituloAlineado"> HORA </div>
+            <div class="fila11__div2__contenido contenido-planilla"><p id="unidadRetiraEquipoHora-dato-planilla"></p></div>
+        </div>
+        
+    </div>
+    
+</div>
+    
+
+<!-- AQUI TERMINA EL CONTENEDOR -->  
+</div>
+
+
+
+
+
+
+
+    </div>
+    
+</div>
+
+
+    
+
+
+    <script src="script.js"></script>
+</body>
+</html>

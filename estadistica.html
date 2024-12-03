@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Planillas de Transformadores</title>
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+<body>
+    <header>
+        <h1>Gestión de Transformadores</h1>
+    </header>
+
+    <nav>
+        <ul class="ul-elementos">
+            <li id="crear-planilla-btn">Crear Planilla</li>
+            <li id="section-planillas"><a href="index.html">Planilla</a></li>
+            <li id="section-estadisticas"><a href="estadistica.html">Estadistica</a></li>
+        </ul>
+    </nav>
+
+    <main class="contenido" id="contenido">
+        <section class="planillas">
+    <div class="buscador">
+        <input type="text" id="buscar-planillas" placeholder="Introduce el serial o la marca">
+        <button id="search-btn">Buscar</button>
+    </div>
+
+    <div id="lista-planillas">
+        <!-- Aquí se generarán dinámicamente las planillas -->
+    </div>
+
+    
+</section>
+
+    </main>
+
+    <div id="modal-form" class="hidden">
+    <div class="modal-content">
+        <div id="caja-cerrar-modal">
+            <button id="cerrar-modal">X</button>
+        </div>
+        <h2>Crear o Editar Planilla</h2>
+        <form>
+
+            <label for="nombreGrupoTrabajo-transformador">Nombre del Grupo de Trabajo:</label>
+            <input type="text" id="nombreGrupoTrabajo-transformador" />
+
+            <label for="correlativo-transformador">Correlativo:</label>
+            <input type="text" id="correlativo-transformador" />
+
+            <label for="fechaTrabajo-transformador">Fecha de Trabajo:</label>
+            <input type="text" id="fechaTrabajo-transformador" />
+
+            <label for="responsableGrupoTrabajo-transformador">Responsable del Grupo de Trabajo:</label>
+            <input type="text" id="responsableGrupoTrabajo-transformador" />
+
+            <label for="centroServicio-transformador">Centro de Servicio:</label>
+            <input type="text" id="centroServicio-transformador" />
+
+            <label for="operadorMesa-transformador">Operador de Mesa:</label>
+            <input type="text" id="operadorMesa-transformador" />
+
+            <label for="evento-transformador">Evento:</label>
+            <input type="text" id="evento-transformador" />
+
+            <label for="numeroEvento-transformador">Número de Evento:</label>
+            <input type="text" id="numeroEvento-transformador" />
+
+            <label for="subestacion-transformador">Subestación:</label>
+            <input type="text" id="subestacion-transformador" />
+
+            <label for="estado-transformador">Estado:</label>
+            <input type="text" id="estado-transformador" />
+
+            <label for="municipio-transformador">Municipio:</label>
+            <input type="text" id="municipio-transformador" />
+
+            <label for="sectorParroquiaNPlano-transformador">Sector/Parroquia/N Plano:</label>
+            <input type="text" id="sectorParroquiaNPlano-transformador" />
+
+            <label for="circuito-transformador">Circuito:</label>
+            <input type="text" id="circuito-transformador" />
+
+            <label for="numeroPosteUbicacion-transformador">Número de Poste / Ubicación:</label>
+            <input type="text" id="numeroPosteUbicacion-transformador" />
+
+            <label for="identificacion-transformador">Identificación:</label>
+            <input type="text" id="identificacion-transformador" />
+
+            <label for="direccionPuntoReferencia-transformador">Dirección(Punto de Referencia):</label>
+            <input type="text" id="direccionPuntoReferencia-transformador" />
+
+           
+
+
+            <label for="trabajoRealizar-transformador">Trabajo a Realizar:</label>
+            <input type="text" id="trabajoRealizar-transformador" />
+
+
+
+            <label for="transformadorCampiaPor-transformador">Transformador Campia Por:</label>
+            <input type="text" id="transformadorCampiaPor-transformador" />
+
+            <label for="numeroUsuariosAfectados-transformador">Número de Usuarios Afectados:</label>
+            <input type="text" id="numeroUsuariosAfectados-transformador" />
+
+            <label for="observaciones-transformador">Observaciones:</label>
+            <input type="text" id="observaciones-transformador" />
+
+            <label for="nombreSupervisorTecnico-transformador">Nombre del Supervisor Técnico:</label>
+            <input type="text" id="nombreSupervisorTecnico-transformador" />
+
+            <label for="firmaSupervisorTecnico-transformador">Firma del Supervisor Técnico:</label>
+            <input type="text" id="firmaSupervisorTecnico-transformador" />
+
+            <label for="cedulaSupervisorTecnico-transformador">Cédula del Supervisor Técnico:</label>
+            <input type="text" id="cedulaSupervisorTecnico-transformador" />
+
+            <label for="numeroReservaSupervisorTecnico-transformador">Número de Reserva del Supervisor Técnico:</label>
+            <input type="text" id="numeroReservaSupervisorTecnico-transformador" />
+
+            <label for="FechaSolicitudSupervisorTecnico-transformador">Fecha de Solicitud del Supervisor Técnico:</label>
+            <input type="date" id="FechaSolicitudSupervisorTecnico-transformador" />
+
+            <label for="tensionesPrimarias-transformador">Tensiones Primarias:</label>
+            <input type="text" id="tensionesPrimarias-transformador" />
+
+            <label for="tensionesSecundarias-transformador">Tensiones Secundarias:</label>
+            <input type="text" id="tensionesSecundarias-transformador" />
+
+            <label for="kva-transformador">KVA:</label>
+            <input type="text" id="kva-transformador" />
+
+            <!--IMPORTANTE-->
+            <label for="serial-transformador">Serial:</label>
+            <input type="text" id="serial-transformador" />
+
+            <label for="marca-transformador">Marca:</label>
+            <input type="text" id="marca-transformador" />
+             <!--IMPORTANTE-->
+
+            <label for="añoFabricacion-transformador">Año de Fabricación:</label>
+            <input type="text" id="añoFabricacion-transformador" />
+
+            <label for="retiradoNombre-transformador">Nombre Retirado:</label>
+            <input type="text" id="retiradoNombre-transformador" />
+
+            <label for="retiradoFecha-transformador">Fecha Retirado:</label>
+            <input type="text" id="retiradoFecha-transformador" />
+
+            <label for="retiradoHora-transformador">Hora Retirado:</label>
+            <input type="text" id="retiradoHora-transformador" />
+
+            <label for="sustitutoMarca-transformador">Marca Sustituto:</label>
+            <input type="text" id="sustitutoMarca-transformador" />
+
+            <label for="sustitutoSerial-transformador">Serial Sustituto:</label>
+            <input type="text" id="sustitutoSerial-transformador" />
+
+            <label for="sustitutoCapacidad-transformador">Capacidad Sustituto:</label>
+            <input type="text" id="sustitutoCapacidad-transformador" />
+
+            <label for="sustitutoAnoFab-transformador">Año de Fabricación Sustituto:</label>
+            <input type="text" id="sustitutoAnoFab-transformador" />
+
+            <label for="centroServicioNombre-transformador">Nombre Centro de Servicio:</label>
+            <input type="text" id="centroServicioNombre-transformador" />
+
+            <label for="centroServicioFecha-transformador">Fecha Centro de Servicio:</label>
+            <input type="text" id="centroServicioFecha-transformador" />
+
+            <label for="centroServicioHora-transformador">Hora Centro de Servicio:</label>
+            <input type="text" id="centroServicioHora-transformador" />
+
+            <label for="centroServicioSello-transformador">Sello Centro de Servicio:</label>
+            <input type="text" id="centroServicioSello-transformador" />
+
+            <label for="centroServicioEstadoFisico-transformador">Estado Físico Centro de Servicio:</label>
+            <input type="text" id="centroServicioEstadoFisico-transformador" />
+
+            <label for="divManEsDiNombre-transformador">Nombre Div. Man. Es. Di:</label>
+            <input type="text" id="divManEsDiNombre-transformador" />
+
+            <label for="divManEsDiFecha-transformador">Fecha Div. Man. Es. Di:</label>
+            <input type="text" id="divManEsDiFecha-transformador" />
+
+            <label for="divManEsDiHora-transformador">Hora Div. Man. Es. Di:</label>
+            <input type="text" id="divManEsDiHora-transformador" />
+
+            <label for="divManEsDiCondicion-transformador">Div Man Es Di Condicion:</label>
+            <input type="text" id="divManEsDiCondicion-transformador" />
+
+            <label for="diagnosticoObtenido-transformador">Diagnóstico Obtenido:</label>
+            <input type="text" id="diagnosticoObtenido-transformador" />
+
+            <label for="tallerReparacionesMenores-transformador">Taller Reparaciones Menores:</label>
+            <input type="text" id="tallerReparacionesMenores-transformador" />
+
+            <label for="plantaRecuperacionTransformadores-transformador">Planta Recuperación Transformadores:</label>
+            <input type="text" id="plantaRecuperacionTransformadores-transformador" />
+
+            <label for="fabricante-transformador">Fabricante:</label>
+            <input type="text" id="fabricante-transformador" />
+
+            <label for="unidadRetiraEquipoNombre-transformador">Unidad Retira Equipo Nombre:</label>
+            <input type="text" id="unidadRetiraEquipoNombre-transformador" />
+
+            <label for="unidadRetiraEquipoSello-transformador">Unidad Retira Equipo Sello:</label>
+            <input type="text" id="unidadRetiraEquipoSello-transformador" />
+
+            <label for="unidadRetiraEquipoFecha-transformador">Unidad Retira Equipo Fecha:</label>
+            <input type="text" id="unidadRetiraEquipoFecha-transformador" />
+
+            <label for="unidadRetiraEquipoHora-transformador">Unidad Retira Equipo Hora:</label>
+            <input type="text" id="unidadRetiraEquipoHora-transformador" />
+
+            <button type="button" id="guardar-planilla-btn">Guardar</button>
+        </form>
+    </div>
+</div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
