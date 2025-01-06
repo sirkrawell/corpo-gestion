@@ -8,15 +8,19 @@ body {
 }
 
 header {
-     background: rgb(2,0,36);
-background: linear-gradient(281deg, rgba(2,0,36,1) 0%, rgba(45,9,103,1) 22%, rgba(30,209,194,1) 86%, rgba(0,212,255,1) 100%); 
+     /*background: rgb(2,0,36);
+background: linear-gradient(281deg, rgba(2,0,36,1) 0%, rgba(45,9,103,1) 22%, rgba(30,209,194,1) 86%, rgba(0,212,255,1) 100%); */
+    background: linear-gradient(281deg, rgb(0, 58, 53) 0%, rgb(0, 58, 53) 22%, rgb(30, 209, 194) 86%, rgb(0, 212, 255) 100%);
     color: white;
     padding: 1rem;
     text-align: center;
 }
 
+/*//ESTILOS DEL MENU*/
+
 nav {
     background: #f4f4f4;
+    padding: 0;
     
 }
 
@@ -27,13 +31,35 @@ nav ul {
     justify-content: center;
 }
 
-nav ul li {
+#crear-planilla-btn {
+    background-color: #bf0249;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+
+}
+#crear-planilla-btn:hover {
+    background-color: #e80057;
+
+}
+
+
+.form-login{
+    background:linear-gradient(281deg, rgb(0, 58, 53) 0%, rgb(0, 58, 53) 22%, rgb(30, 209, 194) 86%, rgb(0, 212, 255) 100%);
+    padding: 2em;
     text-align: center;
-    margin: 0.5rem 0;
+}
+.form-login > input {
+    font-size: 1.2em;
+}
+
+
+nav ul li {
+
+    text-align: center;
     cursor: pointer;
-    padding: 20px;
-    background-color: #262626;
-    margin: 0 5px;
+    background-color: #003a35;
+    
     width: 100%;
     color: white;
     transition-property: background-color;
@@ -42,8 +68,14 @@ nav ul li {
     
 }
 
+ul {
+    padding: 0;
+    margin: 0;
+    gap: 0;
+}
+
 nav ul li:hover {
-    background-color: #3c3c3c;
+    background-color: #005e56;
 }
 
 a {
@@ -51,6 +83,13 @@ a {
 }
 a:visited {
     color: white;
+}
+
+.boton-menu {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -90,7 +129,18 @@ input[id="buscar-planillas"]:focus {
 .planillas {
     margin: 1rem 0;
     border: 1px solid black;
+    animation-name: planillasAnimacion;
+    animation-duration: .5s;
 }
+
+@keyframes planillasAnimacion{
+    from {
+        opacity: .2;
+        transform: translateY(20px);
+    }
+    to{}
+} 
+
 
 .elementoPlanilla {
 	border: 1px solid black;
@@ -211,7 +261,7 @@ input[id="buscar-planillas"]:focus {
 }
 
 .editar-btn,.descargar-btn, .borrar-btn {
-	background-color: #468f32;
+	background-color: #246f10;
 	padding: 20px;
 	border: none;
 	color: white;
@@ -425,4 +475,46 @@ input[id="buscar-planillas"]:focus {
 
 #guardar-planilla-btn:hover {
     background-color: #048104;
+}
+
+
+/*ESTILOS PARA LA TABLA*/
+
+
+
+
+.tabla tr:nth-child(even) {
+    background-color: #f1f8ff;
+}
+.tabla tr:nth-child(odd) {
+    background-color: #e5f1ff;
+}
+
+.tabla tr:nth-child(1) {
+    background-color: #2b354f;
+    color: white;
+    font-size: 2em;
+}
+
+.tabla {
+    box-shadow: 3px 6px 20px 3px #858585;
+    color: #3a3a3a;
+    animation-name: animarEstadistica;
+    animation-duration: .5s;
+    overflow: hidden;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+
+
+@keyframes animarEstadistica {
+from {
+    transform: translateY(50px);
+    opacity: 0.5;
+}
+to {
+
+ }
+
 }
