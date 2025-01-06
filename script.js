@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
+
+
+
+
     const eventosDiv = document.querySelectorAll('.evento-opcion');
     const trabajoRealizarCajaPequena = document.querySelectorAll('.trabajoRealizarCajaPequeña')
     const transformadorCambiaPorCajaPequeña = document.querySelectorAll('.transformadorCambiaPorCajaPequeña')
@@ -34,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const elementosPorPagina = 5;
 
 const MostrarPlanillas = () => {
+
 
 //     const MostrarPlanillas = () => {
 //     // Renderizar la estructura inicial en el contenedor
@@ -425,8 +431,109 @@ const MostrarPlanillas = () => {
         return planillas.slice(inicio, fin);
     };
 
+    //FUNCION PARA CARGAR LA TABLA ESTADISTICA
+
+function generarTablaReportes(reportes, elementoDivId) {
+    // Normalizar las marcas para que sean case-insensitive y contar los reportes
+    const conteoReportes = reportes.reduce((conteo, reporte) => {
+        const marcaNormalizada = reporte.marca.toLowerCase(); // Convertir a minúsculas
+        conteo[marcaNormalizada] = (conteo[marcaNormalizada] || 0) + 1;
+        return conteo;
+    }, {});
+
+    // Ordenar las marcas por número de reportes de mayor a menor
+    const marcasOrdenadas = Object.entries(conteoReportes)
+        .sort((a, b) => b[1] - a[1]); // Orden descendente por cantidad de reportes
+
+    // Obtener el contenedor donde se creará la tabla
+    const div = document.getElementById(elementoDivId);
+    if (!div) {
+        console.error(`El elemento con ID "${elementoDivId}" no existe.`);
+        return;
+    }
+
+    // Crear elementos HTML para la tabla
+    const tabla = document.createElement('table');
+    tabla.classList.add("tabla")
+    tabla.style.borderCollapse = 'collapse';
+    tabla.style.width = '100%';
+
+    // Crear el encabezado de la tabla
+    const encabezado = document.createElement('tr');
+    const thMarca = document.createElement('th');
+    thMarca.textContent = 'Marca';
+    thMarca.style.border = '1px solid black';
+    thMarca.style.padding = '8px';
+
+    const thReportes = document.createElement('th');
+    thReportes.textContent = 'Número de Reportes';
+    thReportes.style.border = '1px solid black';
+    thReportes.style.padding = '8px';
+
+    encabezado.appendChild(thMarca);
+    encabezado.appendChild(thReportes);
+    tabla.appendChild(encabezado);
+
+    // Agregar las filas con los datos ordenados
+    for (const [marca, cantidad] of marcasOrdenadas) {
+        const fila = document.createElement('tr');
+
+        const tdMarca = document.createElement('td');
+        tdMarca.textContent = marca.toUpperCase(); // Mostrar en mayúsculas
+        tdMarca.style.border = '1px solid black';
+        tdMarca.style.padding = '8px';
+
+        const tdReportes = document.createElement('td');
+        tdReportes.textContent = cantidad;
+        tdReportes.style.border = '1px solid black';
+        tdReportes.style.padding = '8px';
+
+        fila.appendChild(tdMarca);
+        fila.appendChild(tdReportes);
+        tabla.appendChild(fila);
+    }
+
+    // Limpiar el div y agregar la tabla
+    div.innerHTML = '';
+    div.appendChild(tabla);
+}
+
+
+
+
+
+
+
+
+
+
     // Función para renderizar las planillas
     const cargarPlanillas = () => {
+
+
+
+//         mainContenido.innerHTML = `<section class="planillas">
+//     <div class="buscador">
+//         <input type="text" id="buscar-planillas" placeholder="Introduce el serial o la marca">
+//         <button id="search-btn">Buscar</button>
+//     </div>
+
+//     <div id="lista-planillas">
+//         <!-- Aquí se generarán dinámicamente las planillas -->
+//     </div>
+
+//     <div id="paginacion">
+//         <button class="anterior">«</button>
+//         <button class="pagina">1</button>
+//         <button class="pagina">2</button>
+//         <button class="pagina">3</button>
+//         <button class="siguiente">»</button>
+//     </div>
+// </section>`
+
+    const listaPlanillas = document.getElementById('lista-planillas');
+    const paginacionDiv = document.getElementById('paginacion');
+
 
         // Obtener el texto de búsqueda y filtrar
         const searchTerm = searchInput.value.toUpperCase();
@@ -441,6 +548,8 @@ const MostrarPlanillas = () => {
 
         listaPlanillas.innerHTML = ''; // Limpiar lista actual
         planillasPorPagina.forEach((planilla) => {
+
+
             const planillaDiv = document.createElement('div');
             planillaDiv.classList.add('elementoPlanilla');
             planillaDiv.innerHTML = `
@@ -450,8 +559,8 @@ const MostrarPlanillas = () => {
                 </div>
                 <div class="elementoPlanilla__botones">
                     <button class="editar-btn elementoPlanilla-botones" data-id="${planilla.id}">Editar</button>
-                    <button class="descargar-btn elementoPlanilla-botones" data-id="${planilla.id}">Descargar</button>
-                    <button class="borrar-btn elementoPlanilla-botones" data-id="${planilla.id}">Borrar</button>
+                    <button class="descargar-btn elementoPlanilla-botones" data-id="${planilla.id}">Ver planilla</button>
+                    
                 </div>
             `;
             listaPlanillas.appendChild(planillaDiv);
@@ -459,13 +568,10 @@ const MostrarPlanillas = () => {
 
         // Renderizar la paginación
         renderizarPaginacion(planillasOrdenadas.length);
+
     };
 
-
-//REVISAR 
-
-
-
+//<button class="borrar-btn elementoPlanilla-botones" data-id="${planilla.id}">Borrar</button> ESTE BOTON BORRA LA PLANILLA, NO INCLUIRLO DENTRO DE LA FUNCION DEL PROGRAMA
 
     // Función para manejar la paginación
     const renderizarPaginacion = (totalElementos) => {
@@ -841,6 +947,45 @@ const MostrarPlanillas = () => {
     localStorage.removeItem('planillas');
     planillas = [];
 }
+
+
+//BOTON DE PLANILLAS
+
+sectionPlanillasBtn.addEventListener("click", ()=> {
+    mainContenido.innerHTML = `<section class="planillas">
+    <div class="buscador">
+        <input type="text" id="buscar-planillas" placeholder="Introduce el serial o la marca">
+        <button id="search-btn">Buscar</button>
+    </div>
+
+    <div id="lista-planillas">
+        <!-- Aquí se generarán dinámicamente las planillas -->
+    </div>
+
+    <div id="paginacion">
+        <button class="anterior">«</button>
+        <button class="pagina">1</button>
+        <button class="pagina">2</button>
+        <button class="pagina">3</button>
+        <button class="siguiente">»</button>
+    </div>
+</section>`
+
+
+    cargarPlanillas(); // Renderizar las planillas
+
+
+})
+
+
+//BOTON DE ESTADISTICA PARA GENERAR LA TABLA
+
+document.getElementById('section-estadisticas').addEventListener('click', () => {
+    generarTablaReportes(planillas, 'contenido');
+});
+
+
+// sectionEstadisticasBtn.addEventListener("click", generarTablaReportes)
 
 
     
