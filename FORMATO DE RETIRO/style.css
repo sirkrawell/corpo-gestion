@@ -20,12 +20,15 @@
     z-index: 1000;
     animation-name: cambio;
     animation-duration:.4s;
+    width: 80vw;  /*REVISAR*/
+    height: 80vh;
 
 }
 
 @keyframes cambio {
 	from {
 		transform: translate(-50%, 50%);
+
 
 	}
   to {
@@ -36,9 +39,10 @@
 
 .contenedor-planilla {
 	margin: auto;
-	width: 27.94cm;
-	height: 12.90cm;
-	overflow: auto;
+/*	width: 27.94cm;*/
+	width: 100%;
+	height: 70vh;
+	overflow-y: auto;
 }
 
 .cuadro-pequeño {
