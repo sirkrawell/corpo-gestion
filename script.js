@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('buscar-planillas');  //NO LO QUITEN PORQUE SE DAÑA TODO XD
     const buscarBtn = document.getElementById('search-btn'); // Nuevo botón de búsqueda
     //const buscarInput = document.getElementById('buscar-planillas'); // El input para búsqueda
+      const CuadroPlanillas = document.querySelector('.planillas');
 
    // localStorage.removeItem('planillas'); //SI SE DAÑA, ACTIVA ESTA opcion, PARECE QUE HAY UNA cosa CORRUPTA
 
@@ -512,34 +513,26 @@ function generarTablaReportes(reportes, elementoDivId) {
 
 
 
+//         mainContenido.innerHTML = `<section class="planillas">
+//     <div class="buscador">
+//         <input type="text" id="buscar-planillas" placeholder="Introduce el serial o la marca">
+//         <button id="search-btn">Buscar</button>
+//     </div>
 
+//     <div id="lista-planillas">
+//         <!-- Aquí se generarán dinámicamente las planillas -->
+//     </div>
+
+//     <div id="paginacion">
+//         <button class="anterior">«</button>
+//         <button class="pagina">1</button>
+//         <button class="pagina">2</button>
+//         <button class="pagina">3</button>
+//         <button class="siguiente">»</button>
+//     </div>
+// </section>`
 
     const listaPlanillas = document.getElementById('lista-planillas');
-
-    listaPlanillas.addEventListener('click', (event) => {
-    const target = event.target;
-
-    if (target.classList.contains('editar-btn')) {
-        const planillaId = target.getAttribute('data-id');
-        const planilla = planillas.find(p => p.id == planillaId);
-        if (planilla) {
-            llenarFormulario(planilla); // Llama a tu función de llenar formulario
-            modal.style.display = 'block'; // Muestra el modal de edición
-        }
-    }
-
-    if (target.classList.contains('descargar-btn')) {
-        const planillaId = target.getAttribute('data-id');
-        const planilla = planillas.find(p => p.id == planillaId);
-        if (planilla) {
-            llenarPlanilla(planilla); // Llama a tu función de llenar planilla
-            modalPlanilla.style.display = 'block'; // Muestra el modal de vista
-        }
-    }
-});
-
-
-
     const paginacionDiv = document.getElementById('paginacion');
 
 
@@ -960,28 +953,7 @@ function generarTablaReportes(reportes, elementoDivId) {
 //BOTON DE PLANILLAS
 
 sectionPlanillasBtn.addEventListener("click", ()=> {
-    mainContenido.innerHTML = `<section class="planillas">
-    <div class="buscador">
-        <input type="text" id="buscar-planillas" placeholder="Introduce el serial o la marca">
-        <button id="search-btn">Buscar</button>
-    </div>
-
-    <div id="lista-planillas">
-        <!-- Aquí se generarán dinámicamente las planillas -->
-    </div>
-
-    <div id="paginacion">
-        <button class="anterior">«</button>
-        <button class="pagina">1</button>
-        <button class="pagina">2</button>
-        <button class="pagina">3</button>
-        <button class="siguiente">»</button>
-    </div>
-</section>`
-
-
-    cargarPlanillas(); // Renderizar las planillas
-
+   location.reload()
 
 })
 
@@ -990,14 +962,23 @@ sectionPlanillasBtn.addEventListener("click", ()=> {
 
 document.getElementById('section-estadisticas').addEventListener('click', () => {
     generarTablaReportes(planillas, 'contenido');
+    // CuadroPlanillas.classList.toggle("hidden");
 
+    // Deshabilitar el botón
+    crearPlanillaBtn.disabled = true;
+    crearPlanillaBtn.style.backgroundColor = "#686868";
+    crearPlanillaBtn.style.cursor = "no-drop";
+    modal.innerHTML = ""
+    ventanaNegra.innerHTML = ""
 
-});
-
-sectionPlanillasBtn.addEventListener('click', () => {
-    mainContenido.innerHTML = ''; // Limpia el contenido (o lo necesario)
-    mainContenido.appendChild(listaPlanillas); // Asegúrate de mantener la lista
-    cargarPlanillas(); // Recarga las planillas después de cambiar de sección
+    // Evitar cualquier acción en el botón
+    crearPlanillaBtn.addEventListener("click", (e) => {
+        if (crearPlanillaBtn.disabled) {
+            e.preventDefault(); // Evita el comportamiento predeterminado
+            e.stopImmediatePropagation(); // Detiene otros listeners
+            console.log("Botón deshabilitado, no se puede hacer clic.");
+        }
+    });
 });
 
 
@@ -1039,3 +1020,11 @@ MostrarPlanillas()
 // let eventos = document.querySelectorAll('input[name="evento"]');
 // console.log(eventos)
 //         eventos.forEach(radio => radio.checked =false)
+
+
+
+//AQUI QUEDARA LA FUNCION PARA CARGAR LAS PLANILLAS EN CASO DE HACER CLICK
+
+
+
+//AQUI QUEDARA LA FUNCION PARA GENERAR LA ESTADISTICA EN CASO DE HACER
